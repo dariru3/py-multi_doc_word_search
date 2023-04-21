@@ -10,17 +10,10 @@ def search_word_in_files(word, path):
             if file.endswith((".pdf", ".docx")):
                 if file.endswith(".pdf"):
                     with open(os.path.join(root, file), "rb") as f:
-                        pdf = PyPDF2.PdfFileReader(f)
+                        pdf = PyPDF2.PdfReader(f)
                         
-                        if pdf.isEncrypted:
-                            try:
-                                pdf.decrypt('')
-                            except:
-                                print(f"Failed to decrypt {file}. Skipping...")
-                                continue
-                        
-                        for page in range(pdf.getNumPages()):
-                            if word in pdf.getPage(page).extractText():
+                        for page in pdf.pages:
+                            if word in page.extract_text():
                                 found_files.add(file)
                 
                 elif file.endswith(".docx"):
@@ -34,8 +27,8 @@ def search_word_in_files(word, path):
         print(f"Found '{word}' in {found_file}")
 
 def main():
-    word = "your_search_word"
-    path = "your_directory_path"
+    word = "nature"
+    path = "test/"
     
     search_word_in_files(word, path)
 
