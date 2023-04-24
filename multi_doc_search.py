@@ -27,8 +27,8 @@ def search_word_in_files(word, path):
         print(f"Found '{word}' in {found_file}")
 
 def main():
-    word = "nature"
-    path = "test/"
+    word = "your_search_word_here"
+    path = "your_directory_here"
     
     search_word_in_files(word, path)
 
